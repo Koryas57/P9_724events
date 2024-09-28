@@ -19,7 +19,7 @@ const Slider = () => {
 
   useEffect(() => {
     // Logging current event id for testing previous .sort
-    console.log(byDateDesc[index]?.id);
+    console.log(byDateDesc?.[index]?.id);
 
     // Auto update index every 5 seconds
     const interval = setInterval(() => {
@@ -50,7 +50,7 @@ const Slider = () => {
       ))}
       <div className="SlideCard__paginationContainer">
         <div className="SlideCard__pagination">
-          {byDateDesc.map((PaginationEvent, radioIdx) => (
+          {byDateDesc?.map((PaginationEvent, radioIdx) => (
             <input
               key={PaginationEvent.id} // Key for each radio button
               type="radio"
