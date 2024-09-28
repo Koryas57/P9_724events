@@ -16,10 +16,13 @@ const Select = ({
   const [value, setValue] = useState();
   const [collapsed, setCollapsed] = useState(true);
   const changeValue = (newValue) => {
-    onChange();
     setValue(newValue);
     setCollapsed(newValue);
+    onChange(newValue); // Pass the selected value to the onChange callback
+    console.log("Selected type: ", newValue); // Check the new value
   };
+
+
   return (
     <div className={`SelectContainer ${type}`} data-testid="select-testid">
       {label && <div className="label">{label}</div>}
