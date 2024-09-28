@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import Menu from "../../containers/Menu";
 import ServiceCard from "../../components/ServiceCard";
 import EventCard from "../../components/EventCard";
@@ -13,7 +14,25 @@ import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
-  const {last} = useData()
+  const { data } = useData();
+
+  if (!data || !data.focus) {
+    return <div>Loading...</div>; // Loading message if data are not ready
+  }
+
+  // Use useMemo to memoize the sorted events to avoid sorting on every render
+  const sortedEvents = useMemo(() =>
+    [...data.events].sort((a, b) => new Date(b.date) - new Date(a.date))
+    , [data.events]); // Only re-run the sorting when data.events changes
+
+  // Get the most recent event
+  const lastEvent = sortedEvents[0];
+
+  // If there is no lastEvent we display this message to avoid an error
+  if (!lastEvent) {
+    return <div>No events available</div>; // Afficher un message si aucun événement n'est disponible
+  }
+
   return <>
     <header>
       <Menu />
@@ -117,9 +136,9 @@ const Page = () => {
       <div className="col presta">
         <h3>Notre derniére prestation</h3>
         <EventCard
-          imageSrc={last?.cover}
-          title={last?.title}
-          date={new Date(last?.date)}
+          imageSrc={lastEvent.cover}
+          title={lastEvent.title}
+          date={new Date(lastEvent.date)}
           small
           label="boom"
         />
