@@ -16,6 +16,9 @@ const Form = ({ onSuccess, onError }) => {
       try {
         await mockContactApi();
         setSending(false);
+        // After API success, trigger onSuccess
+        onSuccess();
+        evt.target.reset(); // We reset the form after succeessfully sending the message
       } catch (err) {
         setSending(false);
         onError(err);
