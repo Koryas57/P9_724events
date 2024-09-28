@@ -13,7 +13,7 @@ const Slider = () => {
   const byDateDesc = useMemo(() =>
     // Sorting events by date in descending order (latest first)
     data?.focus.sort((evtA, evtB) =>
-      new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
+      new Date(evtB.date) - new Date(evtA.date)  // evtB comes before evtA if its date is more recent
     )
     , [data?.focus]);  // Dependency on data.focus to re-run only when data changes
 
