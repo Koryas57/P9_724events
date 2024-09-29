@@ -40,7 +40,7 @@ const EventList = () => {
   // Creating a set of unique event types for the filter selector
   const typeList = new Set(data?.events.map((event) => event.type));
 
-  console.log("data : ", data.events); // Checking database.events existence 
+  console.log("data : ", data?.events); // Checking database.events existence 
   console.log("evenements filtrés : ", filteredEvents); // Checking filtering behavior with events
   console.log("type de filtre en cours: ", type); // Selected filter type
 
