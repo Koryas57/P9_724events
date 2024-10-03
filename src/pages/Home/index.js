@@ -14,20 +14,19 @@ import Form from "../../containers/Form";
 import Modal from "../../containers/Modal";
 
 const Page = () => {
-  const { data } = useData();
 
+  const { data } = useData();
   // Use useMemo to memoize the sorted events to avoid sorting on every render
   const sortedEvents = useMemo(() => {
     if (!data || !data.events) return [];
+    // Copy data.events and sort by date in descending order, ensuring the most recent events appear first.
     return [...data.events].sort((a, b) => new Date(b.date) - new Date(a.date));
-  }, [data?.events]); // Only re-run the sorting when data.events changes
+    // Only re-run the sorting when data.events changes
+  }, [data?.events]);
 
   // Get the most recent event
   const lastEvent = sortedEvents[0];
 
-  if (!lastEvent) {
-    return <div>No events available</div>;
-  }
 
   return <>
     <header>
@@ -132,11 +131,11 @@ const Page = () => {
       <div className="col presta">
         <h3>Notre derniére prestation</h3>
         <EventCard
-          imageSrc={lastEvent.cover}
-          title={lastEvent.title}
-          date={new Date(lastEvent.date)}
+          imageSrc={lastEvent?.cover}
+          title={lastEvent?.title}
+          date={new Date(lastEvent?.date)}
           small
-          label={lastEvent.type}
+          label={lastEvent?.type}
         />
       </div>
       <div className="col contact">
