@@ -130,12 +130,13 @@ const Page = () => {
     <footer className="row">
       <div className="col presta">
         <h3>Notre derniére prestation</h3>
+        {/* Rendering EventCard with fallback values if lastEvent or its properties are undefined */}
         <EventCard
-          imageSrc={lastEvent?.cover}
-          title={lastEvent?.title}
+          imageSrc={lastEvent?.cover || ""}
+          title={lastEvent?.title || "Titre non spécifié"}
           date={new Date(lastEvent?.date)}
           small
-          label={lastEvent?.type}
+          label={lastEvent?.type || "type inconnu"}
         />
       </div>
       <div className="col contact">
